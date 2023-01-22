@@ -1,0 +1,25 @@
+---
+title: "Prezentacje zaliczeniowe"
+author: "Melnyk Artem"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    highlight: zenburn
+    theme: readable
+---
+
+# Opis wybranych danych
+
+*Wybrałem some*
+Emissions by Country, 2002-2022
+
+```{r}
+# data <- read.csv("https://gist.githubusercontent.com/MellKam/36d27fc96249949e38749f47faf276c2/raw/5d9957fd67b6fd731726aa9dbf055d1cff8d4d2b/emissions_by_country.csv") # nolint
+
+data_x <- c(1, 2, 4, 4)
+data_y <- c(3, 1, 3, 4)
+
+plot(data_x, data_y)
+```
+
+
