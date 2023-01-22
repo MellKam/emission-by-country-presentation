@@ -2,10 +2,6 @@
 title: "Prezentacje zaliczeniowe"
 author: "Melnyk Artem"
 date: "`r Sys.Date()`"
-output: 
-  html_document: 
-    highlight: zenburn
-    theme: readable
 ---
 
 # Opis wybranych danych
