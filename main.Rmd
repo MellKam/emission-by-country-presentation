@@ -36,8 +36,79 @@ Zawiera informacje o emisjach całkowitych, a także z produkcji węgla, ropy na
 # Hostowałem dane na Github Gist
 DATA_LINK = "https://gist.githubusercontent.com/MellKam/36d27fc96249949e38749f47faf276c2/raw/5d9957fd67b6fd731726aa9dbf055d1cff8d4d2b/emissions_by_country.csv" # nolint
 
-data <- read.csv(DATA_LINK)
-head(data)
+source_data <- read.csv(DATA_LINK, sep = ",", dec = ".", head = TRUE)
+head(source_data)
 ```
+
+# Statystyki opisowe z wnioskami
+
+### Total number of countries
+
+```{r echo = TRUE}
+total_countries <- length(unique(source_data$Country))
+
+sprintf("Total countries: %d", total_countries)
+```
+
+### Top 10 countries with the highest emissions in 2021
+
+```{r echo = TRUE}
+data_2021 <- source_data[
+  source_data$Year == 2021
+  & source_data$Country != "Global"
+  & source_data$Country != "International Transport",
+]
+
+largest_data_2021 <- data_2021[
+  order(data_2021$Total, decreasing = TRUE),
+][1:10, ]
+
+barplot(
+  largest_data_2021$Total,
+  names.arg = largest_data_2021$Country,
+  col = "darkred",
+  ylab = "Total emission",
+  xlab = "Country name"
+)
+```
+
+### Okres czasu
+
+```{r echo = TRUE}
+min_year <- min(source_data$Year)
+max_year <- max(source_data$Year)
+
+sprintf(
+  "Dane są opisane w okresie od %d do %d roku",
+  min_year,
+  max_year
+)
+```
+
+### Emission in Poland
+
+```{r echo = TRUE}
+# Select data for country Poland
+pol_data <- source_data[
+  source_data$Country == "Poland",
+]
+
+lo <- smooth.spline(pol_data$Year, pol_data$Total, spar = 0.4)
+
+plot(pol_data$Year, pol_data$Total,
+  type = "l",
+  col = "darkblue",
+  xlab = "Year",
+  ylab = "Total emission",
+  # log = "y" # toggle to make logarithmic
+)
+
+lines(predict(lo), col = "red", lwd = 2, )
+
+grid(nx = NULL, ny = NULL,
+    lty = 1, col = "gray", lwd = 1)
+```
+
+
 
 
