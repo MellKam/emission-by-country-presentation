@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Melnyk Artem" />
-  <meta name="dcterms.date" content="2023-01-22" />
+  <meta name="dcterms.date" content="2023-01-23" />
   <title>Prezentacje zaliczeniowe</title>
 
   
@@ -138,17 +138,95 @@ pre code, pre code:not([class]) { white-space: unset; }
 <main>
 <header>
 <h1 id="title" class="toc-ignore">Prezentacje zaliczeniowe</h1>
-<p id="date">2023-01-22</p>
+<p id="date">2023-01-23</p>
 <p id="author">Melnyk Artem</p>
 
 </header>
 
 
 <h1 id="opis-wybranych-danych">Opis wybranych danych</h1>
-<p>Emissions by Country, 2002-2022</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://gist.githubusercontent.com/MellKam/36d27fc96249949e38749f47faf276c2/raw/5d9957fd67b6fd731726aa9dbf055d1cff8d4d2b/emissions_by_country.csv&quot;</span>) <span class="co"># nolint</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<h3 id="emisje-według-krajów-2002-2022">Emisje według krajów,
+2002-2022</h3>
+<p>Kwantyfikacja źródeł i poziomów emisji</p>
+<p><a href="https://zenodo.org/record/7215364#.Y85jM3bML30">Źródło
+danych</a></p>
+<p>Ten zestaw danych zapewnia dogłębne spojrzenie na <strong>globalne
+emisje CO2</strong> na poziomie kraju w latach 2002-2022, umożliwiając
+lepsze zrozumienie, w jakim stopniu każdy kraj przyczynia się do
+globalnego skumulowanego wpływu człowieka na klimat.</p>
+<p>Zawiera informacje o emisjach całkowitych, a także z produkcji węgla,
+ropy naftowej, gazu, cementu i spalania w pochodniach oraz innych
+źródeł. Dane zawierają również zestawienie emisji CO2 na mieszkańca w
+podziale na kraje - pokazując, które kraje przodują pod względem poziomu
+zanieczyszczenia i identyfikując potencjalne obszary, na których należy
+skoncentrować działania redukujące.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nazwa kolumny</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Country</td>
+<td>Nazwa kraju. (String)</td>
+</tr>
+<tr class="even">
+<td>ISO 3166-1 alpha-3</td>
+<td>Trzyliterowy kod kraju. (String)</td>
+</tr>
+<tr class="odd">
+<td>Year</td>
+<td>Rok danych. (Integer)</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>Suma emisji CO2 dla kraju w danym roku. (Float)</td>
+</tr>
+<tr class="odd">
+<td>Coal</td>
+<td>Ilość emisji CO2 z węgla dla kraju w danym roku. (Float)</td>
+</tr>
+<tr class="even">
+<td>Oil</td>
+<td>Wielkość emisji CO2 z ropy dla kraju w danym roku. (Float)</td>
+</tr>
+<tr class="odd">
+<td>Gas</td>
+<td>Wielkość emisji CO2 z gazu dla kraju w danym roku. (Float)</td>
+</tr>
+<tr class="even">
+<td>Cement</td>
+<td>Wielkość emisji CO2 z produkcji cementu dla kraju w danym roku.
+(Float)</td>
+</tr>
+<tr class="odd">
+<td>Flaring</td>
+<td>Wielkość emisji CO2 z operacji spalania na pochodniach dla kraju w
+danym roku. (Float)</td>
+</tr>
+<tr class="even">
+<td>Other</td>
+<td>Wielkość emisji CO2 z innych źródeł dla kraju w danym roku.
+(Float)</td>
+</tr>
+<tr class="odd">
+<td>Per Capita</td>
+<td>Wielkość emisji CO2 na mieszkańca dla kraju w danym roku.
+(Float)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hostowałem dane na Github Gist</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>DATA_LINK <span class="ot">=</span> <span class="st">&quot;https://gist.githubusercontent.com/MellKam/36d27fc96249949e38749f47faf276c2/raw/5d9957fd67b6fd731726aa9dbf055d1cff8d4d2b/emissions_by_country.csv&quot;</span> <span class="co"># nolint</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(DATA_LINK)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##       Country ISO.3166.1.alpha.3 Year Total Coal Oil Gas Cement Flaring Other
 ## 1 Afghanistan                AFG 1750     0   NA  NA  NA     NA      NA    NA
 ## 2 Afghanistan                AFG 1751     0   NA  NA  NA     NA      NA    NA

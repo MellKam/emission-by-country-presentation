@@ -2,15 +2,41 @@
 title: "Prezentacje zaliczeniowe"
 author: "Melnyk Artem"
 date: "`r Sys.Date()`"
+output: 
+  cleanrmd::html_document_clean:
+    theme: "stylize"
 ---
 
 # Opis wybranych danych
 
-Emissions by Country, 2002-2022
+### Emisje według krajów, 2002-2022
+Kwantyfikacja źródeł i poziomów emisji
+
+[Źródło danych](https://zenodo.org/record/7215364#.Y85jM3bML30)
+
+Ten zestaw danych zapewnia dogłębne spojrzenie na **globalne emisje CO2** na poziomie kraju w latach 2002-2022, umożliwiając lepsze zrozumienie, w jakim stopniu każdy kraj przyczynia się do globalnego skumulowanego wpływu człowieka na klimat.
+
+Zawiera informacje o emisjach całkowitych, a także z produkcji węgla, ropy naftowej, gazu, cementu i spalania w pochodniach oraz innych źródeł. Dane zawierają również zestawienie emisji CO2 na mieszkańca w podziale na kraje - pokazując, które kraje przodują pod względem poziomu zanieczyszczenia i identyfikując potencjalne obszary, na których należy skoncentrować działania redukujące.
+
+| Nazwa kolumny | Opis |
+| ----------- | ----------- |
+| Country | Nazwa kraju. (String) |
+| ISO 3166-1 alpha-3 | Trzyliterowy kod kraju. (String) |
+| Year | Rok danych. (Integer) |
+| Total |	Suma emisji CO2 dla kraju w danym roku. (Float) |
+| Coal | Ilość emisji CO2 z węgla dla kraju w danym roku. (Float) |
+| Oil	| Wielkość emisji CO2 z ropy dla kraju w danym roku. (Float) |
+| Gas | Wielkość emisji CO2 z gazu dla kraju w danym roku. (Float) |
+| Cement | Wielkość emisji CO2 z produkcji cementu dla kraju w danym roku. (Float) |
+| Flaring |	Wielkość emisji CO2 z operacji spalania na pochodniach dla kraju w danym roku. (Float) |
+| Other | Wielkość emisji CO2 z innych źródeł dla kraju w danym roku. (Float) |
+| Per Capita | Wielkość emisji CO2 na mieszkańca dla kraju w danym roku. (Float) |
 
 ```{r}
-data <- read.csv("https://gist.githubusercontent.com/MellKam/36d27fc96249949e38749f47faf276c2/raw/5d9957fd67b6fd731726aa9dbf055d1cff8d4d2b/emissions_by_country.csv") # nolint
+# Hostowałem dane na Github Gist
+DATA_LINK = "https://gist.githubusercontent.com/MellKam/36d27fc96249949e38749f47faf276c2/raw/5d9957fd67b6fd731726aa9dbf055d1cff8d4d2b/emissions_by_country.csv" # nolint
 
+data <- read.csv(DATA_LINK)
 head(data)
 ```
 
