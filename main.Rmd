@@ -109,6 +109,57 @@ grid(nx = NULL, ny = NULL,
     lty = 1, col = "gray", lwd = 1)
 ```
 
+### Porównanie całkowitej emisji w krajach europejskich
+
+```{r ehco = TRUE}
+compare_lines <- function(country_names, df_column) {
+  data_frame <- data.frame(
+    matrix(ncol = length(unique(source_data$Year)), nrow = 0)
+  )
+
+  for (country_name in country_names) {
+    country_data <- source_data[
+      source_data$Country == country_name,
+    ]
+
+    data_frame[nrow(data_frame) + 1, ] <- t(country_data[df_column])
+  }
+
+  col_set <- rainbow(nrow(data_frame))
+
+  matplot(
+    pol_data$Year,
+    t(data_frame),
+    xlab = "Year",
+    ylab = sprintf("Emissions from %s", df_column),
+    type = "l",
+    lty = "solid",
+    col = col_set,
+    lwd = 2
+  )
+
+  legend(
+    "left",
+    legend = country_names,
+    lty = c(1, 1),
+    lwd = c(2.5, 2.5),
+    col = col_set
+  )
+}
+
+
+compare_lines(
+  c(
+    "Poland",
+    "Ukraine",
+    "Germany",
+    "Italy",
+    "Portugal"
+  ),
+  "Total"
+)
+```
+
 
 
 
