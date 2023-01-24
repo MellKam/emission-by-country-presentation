@@ -42,34 +42,12 @@ head(source_data)
 
 # Statystyki opisowe z wnioskami
 
-### Total number of countries
+### Całkowita liczba krajów
 
 ```{r echo = TRUE}
 total_countries <- length(unique(source_data$Country))
 
 sprintf("Total countries: %d", total_countries)
-```
-
-### Top 10 countries with the highest emissions in 2021
-
-```{r echo = TRUE}
-data_2021 <- source_data[
-  source_data$Year == 2021
-  & source_data$Country != "Global"
-  & source_data$Country != "International Transport",
-]
-
-largest_data_2021 <- data_2021[
-  order(data_2021$Total, decreasing = TRUE),
-][1:10, ]
-
-barplot(
-  largest_data_2021$Total,
-  names.arg = largest_data_2021$Country,
-  col = "darkred",
-  ylab = "Total emission",
-  xlab = "Country name"
-)
 ```
 
 ### Okres czasu
@@ -85,7 +63,39 @@ sprintf(
 )
 ```
 
-### Emission in Poland
+### Kwantyl emisji na człowieka dla 2021 r.
+
+```{r echo = TRUE}
+data_2021 <- source_data[
+  source_data$Year == "2021"
+  & source_data$Country != "Global"
+  & source_data$Country != "International Transport",
+]
+
+quantile(data_2021$Per.Capita, na.rm = TRUE)
+```
+
+### Mediana emisji na człowieka dla 2021 r.
+
+```{r echo = TRUE}
+median(data_2021$Per.Capita, na.rm = TRUE)
+```
+
+### Średnia wartość emisji na człowieka dla 2021 r.
+
+```{r echo = TRUE}
+mean(data_2021$Per.Capita, na.rm = TRUE)
+```
+
+### Odchylenie standardowe emisji na człowieka dla 2021 r.
+
+```{r}
+sd(data_2021$Per.Capita, na.rm = TRUE)
+```
+
+# Ilustrację danych na wykresach
+
+### Emisja w Polsce
 
 ```{r echo = TRUE}
 # Select data for country Poland
@@ -109,6 +119,8 @@ grid(nx = NULL, ny = NULL,
     lty = 1, col = "gray", lwd = 1)
 ```
 
+Widzimy, że od 2000 roku kwestia ta ustabilizowała się i nie ma tendencji wzrostowej.
+
 ### Porównanie całkowitej emisji w krajach europejskich
 
 ```{r ehco = TRUE}
@@ -128,7 +140,7 @@ compare_lines <- function(country_names, df_column) {
   col_set <- rainbow(nrow(data_frame))
 
   matplot(
-    pol_data$Year,
+    unique(source_data$Year),
     t(data_frame),
     xlab = "Year",
     ylab = sprintf("Emissions from %s", df_column),
@@ -159,6 +171,72 @@ compare_lines(
   "Total"
 )
 ```
+
+### Top 10 krajów o największej emisji w 2021 roku
+
+```{r echo = TRUE}
+data_2021 <- source_data[
+  source_data$Year == 2021
+  & source_data$Country != "Global"
+  & source_data$Country != "International Transport",
+]
+
+largest_data_2021 <- data_2021[
+  order(data_2021$Total, decreasing = TRUE),
+][1:10, ]
+
+barplot(
+  largest_data_2021$Total,
+  names.arg = largest_data_2021$Country,
+  col = "darkred",
+  ylab = "Total emission",
+  xlab = "Country name",
+  font.lab = 2,
+  panel.first = {
+    axis(
+      2,
+      tck = 1,
+      col.ticks = "light gray",
+      lwd.ticks = "1",
+      at = seq(0, 1, by = 0.06),
+      labels = FALSE
+    )
+    box()
+  }
+)
+```
+
+#### Porównanie emisji w czasie w tych krajach (Total)
+
+```{r echo = TRUE}
+compare_lines(unique(largest_data_2021$Country), "Total")
+```
+
+#### Porównanie emisji w czasie w tych krajach (Gas)
+
+```{r echo = TRUE}
+compare_lines(unique(largest_data_2021$Country), "Gas")
+```
+
+#### Porównanie emisji w czasie w tych krajach (Oil)
+
+```{r echo = TRUE}
+compare_lines(unique(largest_data_2021$Country), "Oil")
+```
+
+#### Porównanie emisji w czasie w tych krajach (Coal)
+
+```{r echo = TRUE}
+compare_lines(unique(largest_data_2021$Country), "Coal")
+```
+
+#### Porównanie emisji w czasie w tych krajach (Cement)
+
+```{r echo = TRUE}
+compare_lines(unique(largest_data_2021$Country), "Cement")
+```
+
+Widzimy, że w ostatnim czasie emisje w Chinach znacznie wzrosły, zwłaszcza z produkcji węgla i cementu. Emisja CO2 szybko rośnie również w Indiach.
 
 
 
