@@ -239,5 +239,25 @@ compare_lines(unique(largest_data_2021$Country), "Cement")
 Widzimy, że w ostatnim czasie emisje w Chinach znacznie wzrosły, zwłaszcza z produkcji węgla i cementu. Emisja CO2 szybko rośnie również w Indiach.
 
 
+## Przedział ufności dla średniej
+
+```{r echo = TRUE}
+get_confidence_interval <- function(vector) {
+  n <- length(vector)
+  m <- mean(vector)
+  s <- sd(vector)
+
+  alfa <- 1 - 0.98
+  e <- qt(1 - alfa / 2, n - 1)
+  E <- e * s / sqrt(n)
+
+  return(m + c(-E, +E))
+}
+
+get_confidence_interval(data_2021$Total)
+get_confidence_interval(data_2021$Per.Capita)
+```
+
+
 
 
