@@ -316,3 +316,18 @@ if (p_value < 0.05) {
   )
 }
 ```
+
+# Testowanie hipotezy o normalności rozkładu
+
+```{r echo = TRUE}
+# H0: dane mają rozkład normalny
+# H1: dane nie mają rozkłady normalnego
+
+result <- shapiro.test(data_2021$Total)
+
+print(result)
+
+# W tym przypadku, ponieważ wartość p jest mniejsza niż 0.05,
+# można odrzucić hipotezę zerową, że dane mają rozkład normalny
+# i stwierdzić, że dane nie mają rozkładu normalnego.
+```

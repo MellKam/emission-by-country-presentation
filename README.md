@@ -8,7 +8,7 @@ Projekt jest prezentacją (.Rmd) zawierającą:
 - [x] Przedział ufności dla średniej
 - [x] Minimalną liczebność próby dla średniej
 - [x] Testowanie hipotezy o wartości średniej
-- [ ] Testowanie hipotezy o normalności rozkładu
+- [x] Testowanie hipotezy o normalności rozkładu
 - [ ] Analiza wariancji
 
 Dane należy wgrać do H:\pub (na artemisie) i stamtąd pobierać w prezentacji)

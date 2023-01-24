@@ -494,6 +494,22 @@ wartości średniej</h1>
 <span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Nie jesteśmy w stanie odrzucić hipotezy zerowej Średnia populacji jest większa niż 4.5 ponieważ wartość p jest 0.38396952108341&quot;</code></pre>
+<h1 id="testowanie-hipotezy-o-normalności-rozkładu">Testowanie hipotezy
+o normalności rozkładu</h1>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># H0: dane mają rozkład normalny</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H1: dane nie mają rozkłady normalnego</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(data_2021<span class="sc">$</span>Total)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data_2021$Total
+## W = 0.15625, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># W tym przypadku, ponieważ wartość p jest mniejsza niż 0.05,</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># można odrzucić hipotezę zerową, że dane mają rozkład normalny</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># i stwierdzić, że dane nie mają rozkładu normalnego.</span></span></code></pre></div>
 
 </main>
 
