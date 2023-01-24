@@ -6,8 +6,8 @@ Projekt jest prezentacją (.Rmd) zawierającą:
 - [x] Statystyki opisowe z wnioskami
 - [x] Ilustrację danych na wykresach : histogram, boxplot, wykres liniowy
 - [x] Przedział ufności dla średniej
-- [ ] Minimalną liczebność próby dla średniej
-- [ ] Testowanie hipotezy o wartości średniej
+- [x] Minimalną liczebność próby dla średniej
+- [x] Testowanie hipotezy o wartości średniej
 - [ ] Testowanie hipotezy o normalności rozkładu
 - [ ] Analiza wariancji
 

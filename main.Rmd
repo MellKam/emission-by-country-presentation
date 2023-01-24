@@ -258,6 +258,61 @@ get_confidence_interval(data_2021$Total)
 get_confidence_interval(data_2021$Per.Capita)
 ```
 
+# Minimalną liczebność próby dla średniej
 
+```{r echo = TRUE}
+n <- length(data_2021$Per.Capita)
+sigma <- sd(data_2021$Per.Capita, na.rm = TRUE)
 
+# Wartość przyjętego błędu :
+d <- 1.2
+# Kwantyl rozkładu Normalego :
+alfa <- 0.05
 
+e <- qnorm(1 - alfa)
+# Wyznaczona liczebność :
+print(licz <- e^2 * sigma^2 / d^2)
+print(n)
+```
+
+# Testowanie hipotezy o wartości średniej
+
+```{r echo = TRUE}
+# Definiujemy hipotezę zerową i alternatywną
+H0 <- "Średnia populacji jest większa niż 4.5"
+H1 <- "Średnia populacji jest mniejsza niż 4.5"
+
+# Przeprowadzamy jednorodny test t
+result <- t.test(
+  data_2021$Per.Capita,
+  mu = 4.5,
+  alternative = "less",
+  var.equal = TRUE
+)
+
+print(result)
+
+# Pobieramy wartość p
+p_value <- result$p.value
+
+# Sprawdzamy czy wartość p jest mniejsza od poziomu istotności
+if (p_value < 0.05) {
+  print(
+    paste(
+      "Odrzucamy hipotezę zerową",
+      H0,
+      "ponieważ wartość p jest",
+      p_value
+    )
+  )
+}else{
+  print(
+    paste(
+      "Nie jesteśmy w stanie odrzucić hipotezy zerowej",
+      H0,
+      "ponieważ wartość p jest",
+      p_value
+    )
+  )
+}
+```
