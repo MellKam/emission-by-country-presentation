@@ -172,7 +172,7 @@ compare_lines(
 )
 ```
 
-###
+### Wykres kołowy dla całkowitego udziału emisji w 2021 r.
 
 ```{r echo = TRUE}
 ordered_data_2021 <- data_2021[
