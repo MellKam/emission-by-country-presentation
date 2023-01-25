@@ -172,6 +172,16 @@ compare_lines(
 )
 ```
 
+###
+
+```{r echo = TRUE}
+ordered_data_2021 <- data_2021[
+  order(data_2021$Total, decreasing = TRUE),
+]
+
+pie(ordered_data_2021$Total, ordered_data_2021$Country)
+```
+
 ### Top 10 krajów o największej emisji w 2021 roku
 
 ```{r echo = TRUE}
@@ -181,9 +191,7 @@ data_2021 <- source_data[
   & source_data$Country != "International Transport",
 ]
 
-largest_data_2021 <- data_2021[
-  order(data_2021$Total, decreasing = TRUE),
-][1:10, ]
+largest_data_2021 <- ordered_data_2021[1:10, ]
 
 barplot(
   largest_data_2021$Total,
@@ -331,3 +339,18 @@ print(result)
 # można odrzucić hipotezę zerową, że dane mają rozkład normalny
 # i stwierdzić, że dane nie mają rozkładu normalnego.
 ```
+
+# Analiza wariancji
+
+```{r echo = TRUE}
+plot.design(as.factor(Total) ~ Per.Capita, data = data_2021, col = "blue")
+
+# H0: średnie wartości dla badanych grup są równe
+# H1: średnie wartości dla badanych grup są różne
+
+# Przeprowadzenie ANOVA
+result <- aov(data_2021$Total ~ data_2021$Per.Capita)
+summary(result)
+```
+
+P-value 4.834 oznacza, że nie ma wystarczającego dowodu na istnienie różnicy między średnimi wartościami dla badanych grup. Nie ma podstaw do odrzucenia hipotezy zerowej, czyli braku różnicy między grupami.

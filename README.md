@@ -9,7 +9,7 @@ Projekt jest prezentacją (.Rmd) zawierającą:
 - [x] Minimalną liczebność próby dla średniej
 - [x] Testowanie hipotezy o wartości średniej
 - [x] Testowanie hipotezy o normalności rozkładu
-- [ ] Analiza wariancji
+- [x] Analiza wariancji
 
 Dane należy wgrać do H:\pub (na artemisie) i stamtąd pobierać w prezentacji)
 
